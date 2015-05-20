@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'GlyphIcons';
+    src: url('fonts/glyphicons-halflings-regular.eot'); /* IE9 Compat Modes */
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('fonts/glyphicons-halflings-regular.woff') format('woff'), /* Pretty Modern Browsers */
+    url('fonts/glyphicons-halflings-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+    url('fonts/glyphicons-halflings-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
 *{
     margin:0;
     padding:0;
@@ -9,14 +18,42 @@ body{
 }
 header{
     background: #3f3f3f;
-    padding: 10px 0;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+header nav > ul{
+    margin-left: 20px;
+    display: inline-block;
+}
+header nav > ul a{
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    font-family: GlyphIcons;
+    text-decoration: none;
+    color: #fff;
+    opacity: 0.2;
+}
+header nav > ul a:hover{
+    opacity: 1;
+    background: #2f2f2f;
+}
+header nav > ul li{
+    list-style: none;
+    display: inline-block;
+}
+header nav > ul li a{
+    display: inline-block;
+    padding:16px 20px;
+    font-size: 18pt;
+}
 .innerLimiter{
+    margin:0 auto;
     width: 100%;
-    padding: 0px 70px;
+    max-width: 1000px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -25,8 +62,9 @@ header > .innerLimiter{
     display: flex;
     flex-direction: row;
 }
-header > nav{
+header nav{
     flex-grow: 1;
+    text-align: center;
 }
 
 .outerLimiter{
@@ -86,8 +124,8 @@ input[type=submit]:hover{
 #logo{
     display: block;
     background: url('../imgs/logo.png') no-repeat;
-    width: 138px;
-    height: 32px;
+    width: 140px;
+    height: 60px;
     min-width: 138px;
 }
 .container{
@@ -102,14 +140,11 @@ input[type=submit]:hover{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 10px 70px;
-}
-.container .innerLimiter{
-    padding: 40px 70px;
+    padding: 10px 0;
 }
 h1{
     font-weight: normal;
-    font-family: Segoe, sans-serif;
+    font-family: Calibri Light, sans-serif;
     font-size: 18pt;
 }
 p{
@@ -125,4 +160,7 @@ label, input[type=radio]{
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+}
+#posts .post img{
+    max-width: 40px;
 }

@@ -1,4 +1,4 @@
-app.factory('authentication', function adsData($http, BASE_URL_SERVICE) {
+app.factory('authentication', function($http, BASE_URL_SERVICE) {
     var service = {};
 
     var serviceUrl = BASE_URL_SERVICE + 'users/';
@@ -16,6 +16,11 @@ app.factory('authentication', function adsData($http, BASE_URL_SERVICE) {
     };
 
     service.isLogged = function(logged){
+        if(!localStorage.username){
+            logged(false);
+            return;
+        }
+
         $http.get(BASE_URL_SERVICE + 'me',{
             headers: service.getHeaders()
         })

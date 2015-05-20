@@ -1,0 +1,15 @@
+<div class="top">
+    <div class="innerLimiter">
+        <h1>News Feed</h1>
+    </div>
+</div>
+<div class="innerLimiter">
+    <div id="posts">
+        <div class="post" ng-repeat="post in wallData">
+            <img ng-src="data:image/png;base64,{{post.author.profileImageData || defaultUserAvatar}}" alt=""/>{{post.wallOwner.name}}<br/>
+            {{post.postContent}}
+            <br/>
+            <br/>
+        </div>
+    </div>
+</div>

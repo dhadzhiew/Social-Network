@@ -1,9 +1,9 @@
+<div ng-if="isLogged === true">
+    <div ng-include="'partial/wall.html'"></div>
+</div>
 <div class="innerLimiter">
     <div class="loading "ng-if="isLogged === undefined">Loading...</div>
     <div ng-if="isLogged === false">
         <a href="#/Login">Login</a> | <a href="#/Register">Register</a>
-    </div>
-    <div ng-if="isLogged === true">
-        stena a u
     </div>
 </div>
