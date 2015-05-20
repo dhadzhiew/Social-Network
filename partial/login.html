@@ -1,21 +1,27 @@
-<a href="#/Register">Register</a>
-<div class="formError" ng-show="invalidLogin">Invalid login</div>
-<form id="login-form" ng-submit="login()" name="form" novalidate>
-    <div>
-        <input type="text" ng-model="loginData.username" name="username" placeholder="Username" required/>
-        <span class="inputError" ng-show="(form.$submitted || form.username.$dirty) && form.username.$error.required">
-            Username is invalid.
-        </span>
-    </div>
-    <div>
-        <input type="password" ng-model="loginData.password" name="password" ng-minlength="6" ng-maxlength="100" placeholder="Password"/>
-        <span class="inputError"
-              ng-show="(form.$submitted || form.password.$dirty) && (form.password.$error.minlength || form.password.$error.maxlength)">
-            Password must be between 6 and 100 characters.
-        </span>
-    </div>
-    <div>
-        <input type="submit" ng-disabled="loadingLogin || form.$invalid" value="Login" />
-        <span ng-show="loadingLogin">Loading...</span>
-    </div>
-</form>
+<div class="top">
+    <h1>Login</h1>
+    <p>Drun drun drun</p>
+</div>
+<div class="innerLimiter">
+    <a href="#/Register">Register</a>
+    <div class="formError" ng-show="invalidLogin">Invalid login</div>
+    <form id="login-form" ng-submit="login()" name="form" novalidate>
+        <div>
+            <input type="text" ng-model="loginData.username" name="username" placeholder="Username" required/>
+    <span class="inputError" ng-show="(form.$submitted || form.username.$dirty) && form.username.$error.required">
+        Username is invalid.
+    </span>
+        </div>
+        <div>
+            <input type="password" ng-model="loginData.password" name="password" ng-minlength="6" required ng-maxlength="100" placeholder="Password"/>
+    <span class="inputError"
+          ng-show="(form.$submitted || form.password.$dirty) && (form.password.$error.minlength || form.password.$error.maxlength)">
+        Password must be between 6 and 100 characters.
+    </span>
+        </div>
+        <div>
+            <input type="submit" ng-disabled="loadingLogin || form.$invalid" value="Login" />
+            <span ng-show="loadingLogin">Loading...</span>
+        </div>
+    </form>
+</div>

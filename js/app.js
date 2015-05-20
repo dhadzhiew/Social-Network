@@ -5,7 +5,8 @@ app.constant('BASE_URL_SERVICE', 'http://softuni-social-network.azurewebsites.ne
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl : 'partial/guestHome.html'
+            templateUrl: 'partial/home.html',
+            controller: 'userController'
         })
         .when('/Login', {
             templateUrl : 'partial/login.html',
@@ -14,5 +15,8 @@ app.config(function($routeProvider) {
         .when('/Register', {
             templateUrl: 'partial/register.html',
             controller: 'userController'
+        })
+        .otherwise({
+            redirectTo: '/'
         });
 });
