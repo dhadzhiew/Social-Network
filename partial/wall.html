@@ -1,15 +1,31 @@
 <div class="top">
     <div class="innerLimiter">
         <h1>News Feed</h1>
+        <p>bam bam</p>
     </div>
 </div>
-<div class="innerLimiter">
+<div class="innerLimiter clear wall">
     <div id="posts">
+        <form novalidate name="form" ng-submit="writePost('{{user}}')">
+            <textarea name="post" required name="postContent" ng-model="post.postContent" placeholder="Write a post"></textarea>
+            <div>
+                <input type="submit" ng-disabled="form.$invalid" value="post"/>
+            </div>
+        </form>
         <div class="post" ng-repeat="post in wallData">
-            <img ng-src="data:image/png;base64,{{post.author.profileImageData || defaultUserAvatar}}" alt=""/>{{post.wallOwner.name}}<br/>
+            <img ng-src="{{post.author.profileImageData || defaultUserAvatar}}" alt=""/>{{post.wallOwner.name}}<br/>
             {{post.postContent}}
             <br/>
             <br/>
         </div>
+    </div>
+    <div id="friends">
+        <div class="clear">
+            <h3>Friends</h3>
+            <a href="#/" class="friendsCount">{{friends.totalCount}} <div>Total</div></a>
+        </div>
+        <a ng-repeat="friend in friends.friends" href="#/user/{{friend.username}}">
+            <img ng-src="{{friend.profileImageData || defaultUserAvatar}}" alt=""/></a>
+        </a>
     </div>
 </div>

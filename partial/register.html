@@ -1,58 +1,62 @@
-<div class="top">
-    <div class="innerLimiter">
-        <h1>Register</h1>
-        <p>Drun drun drun</p>
+<div ng-include="'partial/header.html'"></div>
+<div class="container">
+    <div class="top">
+        <div class="innerLimiter">
+            <h1>Register</h1>
+            <p>Drun drun drun</p>
+        </div>
     </div>
-</div>
-<div class="innerLimiter">
-    <a href="#/Login">Login</a>
+    <div class="innerLimiter">
+        <a href="#/Login">Login</a>
 
-    <div class="formError" ng-repeat="error in registerErrors">{{error}}</div>
-    <form ng-submit="register()" name="form" novalidate>
-        <div>
-            <input type="text" name="username" ng-model="registerData.username" required placeholder="Username" />
+        <div class="formError" ng-repeat="error in registerErrors">{{error}}</div>
+        <form ng-submit="register()" name="form" novalidate>
+            <div>
+                <input type="text" name="username" ng-model="registerData.username" required placeholder="Username" />
         <span class="inputError" ng-show="(form.$submitted || form.username.$dirty) && form.username.$error.required">
             Username is invalid.
         </span>
-        </div>
-        <div>
-            <input type="password" ng-model="registerData.password" required name="password" ng-minlength="6" ng-maxlength="100" placeholder="Password"/>
+            </div>
+            <div>
+                <input type="password" ng-model="registerData.password" required name="password" ng-minlength="6" ng-maxlength="100" placeholder="Password"/>
          <span class="inputError"
                ng-show="(form.$submitted || form.password.$dirty) && (form.password.$error.minlength || form.password.$error.maxlength)">
             Password must be between 6 and 100 characters.
         </span>
-        </div>
-        <div>
-            <input type="password" ng-model="registerData.confirmPassword" required name="passwordAgain" equals="{{registerData.password}}" placeholder="Password again"/>
+            </div>
+            <div>
+                <input type="password" ng-model="registerData.confirmPassword" required name="passwordAgain" equals="{{registerData.password}}" placeholder="Password again"/>
         <span class="inputError"
               ng-show="(form.$submitted || form.passwordAgain.$dirty) && form.passwordAgain.$error.equals">
             Password not matching
         </span>
-        </div>
-        <div>
-            <input type="text" name="name" ng-model="registerData.name" required placeholder="Name"/>
+            </div>
+            <div>
+                <input type="text" name="name" ng-model="registerData.name" required placeholder="Name"/>
          <span class="inputError"
                ng-show="(form.$submitted || form.name.$dirty) && form.name.$error.required">
             Invalid name
         </span>
-        </div>
-        <div>
-            <input type="text" name="email" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" ng-model="registerData.email" placeholder="Email"/>
+            </div>
+            <div>
+                <input type="text" name="email" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" ng-model="registerData.email" placeholder="Email"/>
          <span class="inputError"
                ng-show="(form.$submitted || form.email.$dirty) && form.email.$error.pattern">
             Invalid email
         </span>
-        </div>
-        <div>
-            <input type="radio" name="gender" value="1" ng-model="registerData.gender" id="male"/>
-            <label for="male">Male</label>
-            <input type="radio" name="gender" value="2" ng-model="registerData.gender" id="female"/>
-            <label for="female">Female</label>
-            <input type="radio" name="gender" value="0" ng-model="registerData.gender" id="other"/>
-            <label for="other">Other</label>
-        </div>
-        <div>
-            <input type="submit" ng-disabled="form.$invalid" value="Register"/>
-        </div>
-    </form>
+            </div>
+            <div>
+                <input type="radio" name="gender" value="1" ng-model="registerData.gender" id="male"/>
+                <label for="male">Male</label>
+                <input type="radio" name="gender" value="2" ng-model="registerData.gender" id="female"/>
+                <label for="female">Female</label>
+                <input type="radio" name="gender" value="0" ng-model="registerData.gender" id="other"/>
+                <label for="other">Other</label>
+            </div>
+            <div>
+                <input type="submit" ng-disabled="form.$invalid" value="Register"/>
+            </div>
+        </form>
+    </div>
 </div>
+<div ng-include="'partial/footer.html'"></div>

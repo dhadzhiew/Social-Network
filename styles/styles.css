@@ -37,18 +37,89 @@ header nav > ul a{
     color: #fff;
     opacity: 0.2;
 }
-header nav > ul a:hover{
+header nav > ul li:hover a{
     opacity: 1;
     background: #2f2f2f;
 }
 header nav > ul li{
     list-style: none;
     display: inline-block;
+    position: relative;
 }
 header nav > ul li a{
     display: inline-block;
     padding:16px 20px;
     font-size: 18pt;
+    cursor: pointer;
+}
+header nav > ul li .friendRequestsCount{
+    background: #e86464;
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    padding: 0 5px;
+    border-radius: 50%;
+    font-size: 8pt;
+}
+.dropDownContainer{
+    position: absolute;
+    z-index: 99;
+    left: 0;
+}
+.dropDownContainer img{
+    width: 40px;
+    height: 40px;
+    border: 2px solid #4c4c4c;
+}
+.dropDownContainer .dropDownRow{
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+.dropDownContainer .dropDownRow:hover{
+    border-top: 2px solid #393939;
+    border-bottom: 2px solid #393939;
+    padding: 13px 15px;
+    background: #363636;
+ }
+.dropDownContainer .dropDownRow:hover .name{
+    color: #d3d3d3;
+}
+.dropDownContainer .dropDownRow > div{
+    margin-left: 20px;
+}
+.dropDownContainer .dropDownRow > div .name {
+    color: #858585;
+    margin-bottom: 5px;
+    font-weight: bold;
+    display: block;
+    background: none;
+    font-size: 12pt;
+}
+.dropDownContainer .dropDownRow div .button{
+    padding: 3px 10px;
+    color: #bababa;
+    border: 2px solid #393939;
+    font-size: 9pt;
+    cursor: pointer;
+}
+.dropDownContainer .dropDownRow > div .button:hover{
+    color: #fff;
+    border-color: #5d5d5d;
+}
+header nav > ul li .dropDownContent{
+    background: #313131;
+    color: #f5f5f5;
+    width: 350px;
+    text-align: left;
+}
+.upArrow{
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 10px 5px;
+    border-color: transparent transparent #313131 transparent;
+    margin-left: 20px;
 }
 .innerLimiter{
     margin:0 auto;
@@ -72,7 +143,7 @@ header nav{
     max-width: 1000px;
     margin: 0 auto;
 }
-input{
+input, textarea{
     padding: 10px;
     margin: 10px 0;
     -webkit-box-sizing: border-box;
@@ -80,7 +151,7 @@ input{
     box-sizing: border-box;
     outline: none;
 }
-input[type=text], input[type=password]{
+input[type=text], input[type=password], textarea{
     background: #e8e8e8;
     border: 0;
     border-bottom: 2px solid #dedede;
@@ -110,6 +181,11 @@ input[type=submit]{
 input[type=submit]:hover{
     background: #44acfe;
     color: #fff;
+}
+textarea{
+    resize: none;
+    max-width: 600px;
+    height: 100px;
 }
 .formError{
     background: #ff0419;
@@ -163,4 +239,115 @@ label, input[type=radio]{
 }
 #posts .post img{
     max-width: 40px;
+}
+#posts{
+    margin-top: 20px;
+    flex-grow: 1;
+}
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+    zoom: 1;
+}
+#friends{
+    background: #3d6e98;
+    width: 300px;
+    position: relative;
+    top: -50px;
+    padding: 5px;
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0,0, 0.5);
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0,0, 0.5);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+#friends img {
+    width: 56px;
+    height: 56px;
+    border:0;
+}
+#friends h3{
+    padding: 20px 0px 0px 20px;
+    font-family: Tahoma;
+    opacity: 0.8;
+    color: #fff;
+    float: left;
+    font-weight: normal;
+}
+#friends .friendsCount{
+    -webkit-transition: all ease 0.3s;
+    -moz-transition: all ease 0.3s;
+    -ms-transition: all ease 0.3s;
+    -o-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    color: #fff;
+    opacity: 0.5;
+    float: right;
+    font-size: 20pt;
+    padding: 10px;
+    text-decoration: none;
+}
+#friends .friendsCount:hover{
+    opacity: 0.9;
+}
+#friends .friendsCount > div{
+    font-size: 10pt;
+    text-align: right;
+}
+#profileInfo{
+    display: flex;
+    flex-direction: row;
+    padding-top: 10px;
+}
+#profileInfo > div{
+    padding: 5px 5px 0 0;
+}
+#profileInfo .online{
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    opacity: 0.2;
+}
+#profileInfo .name{
+    color: #fff;
+    font-size: 10pt;
+    opacity: 0.7;
+}
+#profileInfo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255, 0.2);
+}
+.friendRequestsContent{
+    margin-left: -70px;
+}
+.searchMenuContent{
+    margin-left: -280px;
+}
+.searchMenuContent input{
+    max-width: 330px;
+    margin-left: 10px;
+    background: #282828;
+    border-bottom: 0;
+    color: #f9b358;
+}
+.totalResultsCount{
+    color: #555454;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 5px;
+}
+.totalResultsCount > span{
+    color: #7f7d7d;
+}
+.searchMenuContent .name{
+    margin-top: 12px;
+}
+.dropDownContainer a{
+    padding: 0;
+    margin: 0;
+}
+.wall{
+    display: flex;
 }
