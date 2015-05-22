@@ -29,5 +29,21 @@ app.factory('feedData', function($http, authentication, BASE_URL_SERVICE){
         );
     };
 
+    service.likePost = function likePost(postId){
+        return $http({
+            method: "POST",
+            url: BASE_URL_SERVICE + 'Posts/' + postId + '/likes',
+            headers: authentication.getHeaders()
+        });
+    };
+
+    service.unlikePost = function unlikePost(postId){
+        return $http({
+            method: "DELETE",
+            url: BASE_URL_SERVICE + 'Posts/' + postId + '/likes',
+            headers: authentication.getHeaders()
+        });
+    };
+
     return service;
 });

@@ -353,6 +353,8 @@ label, input[type=radio]{
 }
 .wall{
     display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 }
 .userPreview .cover{
     text-align: center;
@@ -400,6 +402,7 @@ label, input[type=radio]{
 .userMain{
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
 }
 .userMain #friends{
     margin-top: 10px;

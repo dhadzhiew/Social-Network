@@ -14,7 +14,7 @@
                     <div class="date">{{post.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
                 </div>
                 <div class="likesComments">
-                    <div class="likesCount">{{post.likes || 0}}</div>
+                    <div ng-click="likePost(post);" class="likesCount">{{post.likesCount || 0}}</div>
                     <div class="commentsCount">{{post.totalCommentsCount || 0}}</div>
                 </div>
             </div>

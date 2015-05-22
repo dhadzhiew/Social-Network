@@ -6,8 +6,6 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
         $scope.isLogged = isLogged;
         if(isLogged){
             loadData();
-        }else{
-            authentication.clearCredentials();
         }
     });
 
@@ -53,9 +51,27 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
             });
     };
 
+    $scope.likePost = function(post){
+        if(!post.liked){
+            feedData.likePost(post.id)
+                .success(function(){
+                    post.liked = true;
+                    post.likesCount++;
+                })
+                .error(function(error){
+                    console.log(error);
+                });
+        }else{
+            feedData.unlikePost(post.id)
+                .success(function(){
+                    post.liked = false;
+                    post.likesCount--;
+                });
+        }
+    };
+
     $scope.sendRequest = function sendRequest(){
         $scope.currentProfileData.hasPendingRequest = true;
-        //userData.makeFriendRequest($scope.currentProfileData.username);
     };
 
     function loadCurrentProfileData(username){
