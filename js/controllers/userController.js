@@ -7,14 +7,6 @@ app.controller('userController', function($scope, authentication, $routeParams, 
 
     authentication.isLogged(function(isLogged){
         $scope.isLogged = isLogged;
-        if(($location.path() === '/Login' || $location.path() === '/Register') && isLogged){
-            $location.path('/');
-        }
-        if(isLogged){
-            loadData();
-        }else{
-            authentication.clearCredentials();
-        }
     });
 
     $scope.login = function login(){

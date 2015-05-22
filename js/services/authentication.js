@@ -15,9 +15,9 @@ app.factory('authentication', function($http, BASE_URL_SERVICE) {
         return $http.post(serviceUrl + 'Logout', null);
     };
 
-    service.isLogged = function(logged){
+    service.isLogged = function(callback){
         if(!localStorage.username){
-            logged(false);
+            callback(false);
             return;
         }
 
@@ -26,13 +26,13 @@ app.factory('authentication', function($http, BASE_URL_SERVICE) {
         })
             .success(function(serverData){
                 if(serverData.username == localStorage.username){
-                    logged(true);
+                    callback(true);
                 }else{
-                    logged(false);
+                    callback(false);
                 }
             })
             .error(function(){
-                logged(false);
+                callback(false);
             });
     };
 

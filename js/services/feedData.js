@@ -10,8 +10,23 @@ app.factory('feedData', function($http, authentication, BASE_URL_SERVICE){
         );
     };
 
-    service.writePost = function(user){
-        alert(user);
+    service.getFriendFeed = function getUserFeed(username, startId, pageSize){
+        return $http.get(
+            BASE_URL_SERVICE + 'users/' + username + '/wall?StartPostId=' + startId + '&PageSize=' + pageSize,
+            {
+                headers: authentication.getHeaders()
+            }
+        );
+    };
+
+    service.writePost = function(data){
+        return $http.post(
+            BASE_URL_SERVICE + 'posts',
+            data,
+            {
+                headers: authentication.getHeaders()
+            }
+        );
     };
 
     return service;

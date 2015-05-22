@@ -6,17 +6,21 @@
 </div>
 <div class="innerLimiter clear wall">
     <div id="posts">
-        <form novalidate name="form" ng-submit="writePost('{{user}}')">
-            <textarea name="post" required name="postContent" ng-model="post.postContent" placeholder="Write a post"></textarea>
-            <div>
-                <input type="submit" ng-disabled="form.$invalid" value="post"/>
-            </div>
-        </form>
         <div class="post" ng-repeat="post in wallData">
-            <img ng-src="{{post.author.profileImageData || defaultUserAvatar}}" alt=""/>{{post.wallOwner.name}}<br/>
-            {{post.postContent}}
-            <br/>
-            <br/>
+            <div class="header">
+                <img ng-src="{{post.author.profileImageData || defaultUserAvatar}}" alt="{{post.author.name}}'s avatar"/>
+                <div class="authorAndDate">
+                    <div class="name">{{post.author.name}}</div>
+                    <div class="date">{{post.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
+                </div>
+                <div class="likesComments">
+                    <div class="likesCount">{{post.likes || 0}}</div>
+                    <div class="commentsCount">{{post.totalCommentsCount || 0}}</div>
+                </div>
+            </div>
+            <div class="postContent">
+                {{post.postContent}}
+            </div>
         </div>
     </div>
     <div id="friends">

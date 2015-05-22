@@ -12,6 +12,15 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
         );
     };
 
+    service.getUserFriends  = function getUserFriends(username){
+        return $http.get(
+            BASE_URL_SERVICE + 'users/' + username + '/friends',
+            {
+                headers: authentication.getHeaders()
+            }
+        );
+    };
+
     service.searchUsersByName = function searchFriends(userName){
         return $http.get(
             BASE_URL_SERVICE + 'users/search?searchTerm=' + userName,
@@ -32,7 +41,7 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
 
     service.getUserDataByUsername = function getUserDataByUsername(username){
         return $http.get(
-            serviceUrl,
+            BASE_URL_SERVICE + 'users/' + username,
             {
                 headers: authentication.getHeaders()
             }
