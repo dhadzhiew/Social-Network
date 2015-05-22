@@ -66,5 +66,29 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
         );
     };
 
+    service.acceptFriendRequest = function acceptFriendRequest(id){
+        return $http({
+            method: 'PUT',
+            url: BASE_URL_SERVICE + 'me/requests/' + id + '?status=approved',
+            headers: authentication.getHeaders()
+        });
+    };
+
+    service.rejectFriendRequest = function rejectFriendRequest(id){
+        return $http({
+            method: 'PUT',
+            url: BASE_URL_SERVICE + 'me/requests/' + id + '?status=rejected',
+            headers: authentication.getHeaders()
+        });
+    };
+
+    service.sendFriendRequest = function sendFriendRequest(username){
+        return $http({
+            method: 'POST',
+            url: BASE_URL_SERVICE + 'me/requests/' + username,
+            headers: authentication.getHeaders()
+        });
+    };
+
     return service;
 });

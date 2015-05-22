@@ -4,15 +4,15 @@
         <nav ng-show="isLogged">
             <ul>
                 <li><a href="#/">&#xe021;</a></li>
-                <li ng-mouseleave="hideFriendRequests();" ng-mouseenter="showFriendRequests();">
+                <li ng-click="showFriends = true" click-anywhere-but-here="showFriends = false">
                     <a>
                         &#xe008;
-                        <span ng-show="user.friendRequests.length" class="friendRequestsCount">{{user.friendRequests.length}}</span>
+                        <span ng-show="(user.friendRequests|filter:{processed: 'undefined'}).length" class="friendRequestsCount">{{(user.friendRequests|filter:{processed: 'undefined'}).length}}</span>
                     </a>
-                    <div ng-show="showFriends && user.friendRequests.length" class="dropDownContainer">
+                    <div ng-show="showFriends" class="dropDownContainer">
                         <div class="upArrow friendRequestsArrow"></div>
                         <div class="dropDownContent friendRequestsContent">
-                            <div class="dropDownRow" ng-repeat="request in user.friendRequests">
+                            <div class="dropDownRow" ng-hide="request.processed" ng-repeat="request in user.friendRequests">
                                 <a href="#/user/{{request.user.username}}">
                                     <img ng-src="{{request.user.profileImageData || defaultUserAvatar}}" alt="{{request.user.name}}'s photo"/>
                                 </a>
@@ -20,17 +20,19 @@
                                     <a href="#/user/{{request.user.username}}" class="name">
                                         {{request.user.name}}
                                     </a>
-                                    <span class="button">Accept</span>
-                                    <span class="button">Reject</span>
+                                    <span ng-click="acceptFriendRequest(request.id);" class="button">Accept</span>
+                                    <span ng-click="rejectFriendRequest(request.id);" class="button">Reject</span>
                                 </div>
                             </div>
-                            <p class="totalResultsCount"><span>{{user.friendRequests.length || 0}}</span> results total</p>
+                            <p class="totalResultsCount">
+                                <span>{{(user.friendRequests|filter:{processed: 'undefined'}).length || 0}}</span> results total
+                            </p>
                         </div>
                     </div>
                 </li>
                 <li><a href="#/">&#xe019;</a></li>
-                <li ng-mouseenter="showSearchMenu();" ng-mouseleave="hideSearchMenu();">
-                    <a href="#/">&#xe003;</a>
+                <li ng-click="shownSearchMenu = true" click-anywhere-but-here="shownSearchMenu = false" >
+                    <a>&#xe003;</a>
                     <div ng-show="shownSearchMenu" ng-controller="mainController" class="dropDownContainer">
                         <div class="upArrow searchMenuArrow"></div>
                         <div class="dropDownContent searchMenuContent">

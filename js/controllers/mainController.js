@@ -13,22 +13,6 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
         loadCurrentProfileData($routeParams.username);
     }
 
-    $scope.showFriendRequests = function(){
-        $scope.showFriends = true;
-    };
-
-    $scope.hideFriendRequests = function(){
-        $scope.showFriends = false;
-    };
-
-    $scope.showSearchMenu = function(){
-        $scope.shownSearchMenu = true;
-    };
-
-    $scope.hideSearchMenu = function(){
-        $scope.shownSearchMenu = false;
-    };
-
     $scope.searchUserByName = function(){
         userData.searchUsersByName($scope.search)
             .success(function(serverData){
@@ -52,6 +36,9 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
     };
 
     $scope.likePost = function(post){
+        if(post.author.isFriend == false && post.wallOwner.isFriend == false){
+            return;
+        }
         if(!post.liked){
             feedData.likePost(post.id)
                 .success(function(){
@@ -71,7 +58,10 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
     };
 
     $scope.sendRequest = function sendRequest(){
-        $scope.currentProfileData.hasPendingRequest = true;
+        userData.sendFriendRequest($scope.currentProfileData.username)
+            .success(function(){
+                $scope.currentProfileData.hasPendingRequest = true;
+            });
     };
 
     $scope.submitComment = function submitComment(post){
@@ -83,20 +73,55 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
             });
     };
 
-    $scope.likeComment = function likeComment(postId, comment){
+    $scope.likeComment = function likeComment(post, comment){
+        if(post.author.isFriend == false && post.wallOwner.isFriend == false){
+            return;
+        }
+
         if(!comment.liked){
-            feedData.likeComment(postId, comment.id)
+            feedData.likeComment(post.id, comment.id)
                 .success(function(){
                     comment.liked = true;
                     comment.likesCount++;
                 });
         }else{
-            feedData.unlikeComment(postId, comment.id)
+            feedData.unlikeComment(post.id, comment.id)
                 .success(function(){
                     comment.liked = false;
                     comment.likesCount--;
                 });
         }
+    };
+
+    $scope.acceptFriendRequest = function(id){
+        userData.acceptFriendRequest(id)
+            .success(function(){
+                $scope.user.friendRequests
+                    .forEach(function(req){
+                        if(req.id === id){
+                            req.processed = true;
+                        }
+                    });
+                userData.getFriends()
+                    .success(function(serverData){
+                        $scope.friends = serverData;
+                    })
+                    .error(function(){
+
+                    });
+            });
+    };
+
+    $scope.rejectFriendRequest = function(id){
+        userData.rejectFriendRequest(id)
+            .success(function(){
+                $scope.user.friendRequests
+                    .forEach(function(req){
+                        if(req.id === id){
+                            req.processed = true;
+                        }
+                    });
+            });
     };
 
     function loadCurrentProfileData(username){
@@ -110,14 +135,14 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
                         .success(function(serverData){
                             $scope.currentProfileData.friends= serverData;
                         });
-                    feedData.getFriendFeed(username, '', 5)
-                        .success(function(serverData){
-                            $scope.currentProfileData.posts = serverData;
-                            $scope.currentProfileData.posts = $scope.currentProfileData.posts.sort(function(a,b){
-                                return b.id - a.id;
-                            });
-                        });
                 }
+                feedData.getFriendFeed(username, '', 5)
+                    .success(function(serverData){
+                        $scope.currentProfileData.posts = serverData;
+                        $scope.currentProfileData.posts = $scope.currentProfileData.posts.sort(function(a,b){
+                            return b.id - a.id;
+                        });
+                    });
             })
             .error(function(){
 
