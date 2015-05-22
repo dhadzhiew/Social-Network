@@ -74,6 +74,31 @@ app.controller('mainController', function($scope, authentication, feedData, DEFA
         $scope.currentProfileData.hasPendingRequest = true;
     };
 
+    $scope.submitComment = function submitComment(post){
+        feedData.addCommentToPost(post.id, post.unsubmitCommentContent)
+            .success(function(serverData){
+                post.unsubmitCommentContent = '';
+                post.comments.push(serverData);
+                post.totalCommentsCount++;
+            });
+    };
+
+    $scope.likeComment = function likeComment(postId, comment){
+        if(!comment.liked){
+            feedData.likeComment(postId, comment.id)
+                .success(function(){
+                    comment.liked = true;
+                    comment.likesCount++;
+                });
+        }else{
+            feedData.unlikeComment(postId, comment.id)
+                .success(function(){
+                    comment.liked = false;
+                    comment.likesCount--;
+                });
+        }
+    };
+
     function loadCurrentProfileData(username){
         $scope.currentProfileData = {};
 

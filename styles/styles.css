@@ -237,9 +237,6 @@ label, input[type=radio]{
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-#posts .post img{
-    max-width: 40px;
-}
 #posts{
     margin-top: 20px;
     flex-grow: 1;
@@ -432,6 +429,7 @@ label, input[type=radio]{
     color: #4595d5;
     font-weight: bold;
     font-family: Arial;
+    font-size: 12pt;
 }
 .post .header .authorAndDate .date{
     color: #bababa;
@@ -468,4 +466,37 @@ label, input[type=radio]{
     padding: 3px 5px 3px 20px;
     margin-right: 5px;
     cursor: pointer;
+}
+.comments{
+    border-top: 2px solid #eeeeee;
+    border-bottom: 2px solid #eeeeee;
+    margin: 10px 0;
+    padding: 10px;
+}
+.comments > .comment .header > img{
+    width: 20px;
+    height: 20px;
+}
+.comments > .comment .header .authorAndDate{
+    padding:0;
+}
+.comments > .comment .header .authorAndDate .name{
+    font-size: 8pt;
+}
+.comments > .comment .header .authorAndDate .date{
+    font-size: 7pt;
+}
+.comments .commentContent{
+    color: #b1b1b1;
+    font-family: Georgia;
+    font-size: 10pt;
+    padding: 5px 0;
+}
+.comments input[type=submit]{
+    font-size: 8pt;
+    padding: 5px;
+    margin: 0;
+}
+textarea.textareaComment{
+    height: 50px;
 }

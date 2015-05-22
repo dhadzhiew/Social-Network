@@ -45,5 +45,33 @@ app.factory('feedData', function($http, authentication, BASE_URL_SERVICE){
         });
     };
 
+    service.addCommentToPost = function addCommentToPost(postId, commentContent){
+        var data = {
+            commentContent: commentContent
+        };
+        return $http({
+            url: BASE_URL_SERVICE + 'posts/' + postId + '/comments',
+            method: "POST",
+            headers: authentication.getHeaders(),
+            data: data
+        });
+    };
+
+    service.likeComment = function likeComment(postId, commentId){
+        return $http({
+            url: BASE_URL_SERVICE + 'posts/' + postId + '/comments/' + commentId + '/likes',
+            method: "POST",
+            headers: authentication.getHeaders()
+        });
+    };
+
+    service.unlikeComment = function unlikeComment(postId, commentId){
+        return $http({
+            url: BASE_URL_SERVICE + 'posts/' + postId + '/comments/' + commentId + '/likes',
+            method: "DELETE",
+            headers: authentication.getHeaders()
+        });
+    };
+
     return service;
 });

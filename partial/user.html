@@ -15,7 +15,7 @@
         <div class="userMain">
             <div class="posts">
                 <form ng-if="currentProfileData.isFriend" novalidate name="form" ng-submit="writePost('{{user}}')">
-                    <textarea name="post" required name="postContent" ng-model="post.postContent" placeholder="Write a post"></textarea>
+                    <textarea required name="postContent" ng-model="post.postContent" placeholder="Write a post"></textarea>
                     <div>
                         <input type="submit" ng-disabled="form.$invalid" value="post"/>
                     </div>
@@ -34,6 +34,29 @@
                     </div>
                     <div class="postContent">
                         {{post.postContent}}
+                    </div>
+                    <div class="comments">
+                        <div class="comment" ng-repeat="comment in post.comments | orderBy: 'id'">
+                            <div class="header">
+                                <img ng-src="{{comment.author.profileImageData || defaultUserAvatar }}" alt="{{comment.author.name}}'s photo"/>
+                                <div class="authorAndDate">
+                                    <div class="name">{{comment.author.name}}</div>
+                                    <div class="date">{{comment.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
+                                </div>
+                                <div class="likesComments">
+                                    <div ng-click="likeComment(post.id, comment)" class="likesCount">{{comment.likesCount}}</div>
+                                </div>
+                            </div>
+                            <div class="commentContent">
+                                {{comment.commentContent}}
+                            </div>
+                        </div>
+                        <form name="form" novalidate ng-submit="submitComment(post);">
+                            <div>
+                                <textarea ng-model="post.unsubmitCommentContent" name="commentContent" required class="textareaComment" ></textarea>
+                            </div>
+                            <input type="submit" ng-disabled="form.$invalid" value="comment"/>
+                        </form>
                     </div>
                 </div>
             </div>
