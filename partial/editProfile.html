@@ -1,0 +1,21 @@
+<div ng-include="'partial/header.html'"></div>
+<div class="container">
+    <div class="innerLimiter profileEdit">
+        <div class="cover">
+            <img ng-src="{{currentProfileData.coverImageData || defaultUserCover}}"/>
+        </div>
+        <div class="userInfo">
+            <img class="avatar" src="{{currentProfileData.profileImageData || defaultUserAvatar}}" alt="{{currentProfileData.name}}'s avatar"/>
+            <div class="name">
+                <input type="text" value="Ivan Petrov{{currentProfileData.name}}"/>
+            </div>
+                <div class="changeAvatarButton">change avatar</div>
+            </div>
+            <div class="changeAvatarButton">change cover</div>
+        </div>
+        <div class="userMain">
+
+        </div>
+    </div>
+</div>
+<div ng-include="'partial/footer.html'"></div>

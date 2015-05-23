@@ -21,6 +21,10 @@ app.config(function($routeProvider) {
             templateUrl: 'partial/user.html',
             controller: 'mainController'
         })
+        .when('/profile', {
+            templateUrl: 'partial/editProfile.html',
+            controller: 'userController'
+        })
         .otherwise({
             redirectTo: '/'
         });
@@ -32,7 +36,7 @@ app.run(function($rootScope, $location, authentication) {
                 $location.path('/');
             }
 
-            if($location.path().indexOf('user') != -1 && !isLogged){
+            if(($location.path().indexOf('user') != -1 || $location.path().indexOf('/profile') != -1) && !isLogged){
                 $location.path('/');
             }
         });

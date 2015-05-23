@@ -28,10 +28,15 @@ app.factory('authentication', function($http, BASE_URL_SERVICE) {
                 if(serverData.username == localStorage.username){
                     callback(true);
                 }else{
+                    service.clearCredentials();
                     callback(false);
                 }
             })
-            .error(function(){
+            .error(function(error){
+                if(error != null){
+                    service.clearCredentials();
+                }
+
                 callback(false);
             });
     };

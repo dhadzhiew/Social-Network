@@ -1,5 +1,6 @@
-app.controller('userController', function($scope, authentication, $routeParams, $location, DEFAULT_USER_AVATAR, userData){
+app.controller('userController', function($scope, authentication, $routeParams, $location, DEFAULT_USER_AVATAR, userData, DEFAULT_USER_COVER){
     $scope.defaultUserAvatar = DEFAULT_USER_AVATAR;
+    $scope.defaultUserCover = DEFAULT_USER_COVER;
     function clearData() {
         $scope.loginData = {};
         $scope.registerData = {};
@@ -38,7 +39,6 @@ app.controller('userController', function($scope, authentication, $routeParams, 
                 $location.path('/');
             })
             .error(function(error){
-                console.log(error);
                 $scope.registerErrors = error.modelState[""];
                 $scope.loadingRegister = false;
             });
