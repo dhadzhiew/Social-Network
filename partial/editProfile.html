@@ -1,21 +1,42 @@
 <div ng-include="'partial/header.html'"></div>
 <div class="container">
-    <div class="innerLimiter profileEdit">
+    <div class="innerLimiter userEdit" ng-controller="userController" ng-init="loadUserData();">
         <div class="cover">
-            <img ng-src="{{currentProfileData.coverImageData || defaultUserCover}}"/>
+            <img ng-src="{{user.coverImageData || defaultUserCover}}"/>
         </div>
-        <div class="userInfo">
-            <img class="avatar" src="{{currentProfileData.profileImageData || defaultUserAvatar}}" alt="{{currentProfileData.name}}'s avatar"/>
-            <div class="name">
-                <input type="text" value="Ivan Petrov{{currentProfileData.name}}"/>
+        <img class="avatar" src="{{user.profileImageData || defaultUserAvatar}}" alt="{{user.name}}'s avatar"/>
+        <div class="changesButtons">
+            <input type="file" class="hidden" id="avatarFile" fileread="user.tempProfileImageData" />
+            <input type="file" class="hidden" id="avatarCover" fileread="user.tempCoverImageData" />
+            <span class="changeButton" click-to="avatarFile">Change avatar <small>128 kb</small></span>
+            <span class="changeButton" click-to="avatarCover">Change cover <small>1024 kb</small></span>
+        </div>
+        <form novalidate name="editProfileForm" ng-submit="editProfile(editProfileForm, user);" class="clear">
+            <input type="text" name="name" ng-model="user.name" placeholder="Name" required/>
+            <input type="text" name="email" ng-model="user.email" ng-pattern="/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i" placeholder="Email" required/>
+            <label><input type="radio" ng-model="user.gender" ng-checked="user.gender === 1" value="1"/>Male</label>
+            <label><input type="radio" ng-model="user.gender" ng-checked="user.gender === 2" value="2"/>Female</label>
+            <label><input type="radio" ng-model="user.gender" ng-checked="user.gender === 0" value="0"/>Other</label><br/>
+            <input type="submit" ng-disabled="editProfileForm.$invalid" class="right" value="Save Changes"/>
+        </form>
+        <hr/>
+        <form novalidate name="changePasswordForm" class="clear" ng-submit="changePassword(user);">
+            <input type="password" required ng-model="user.oldPassword" placeholder="Old password"/>
+            <input type="password" ng-model="user.password" required name="password" ng-minlength="6"
+                   ng-maxlength="100" placeholder="New password"/>
+            <input type="password" required ng-model="user.passwordAgain" name="passwordAgain" equals="{{user.password}}"
+                   placeholder="New password again" /><br/>
+            <div class="inputError"
+                  ng-show="(changePasswordForm.$submitted || changePasswordForm.password.$dirty)
+                  && (changePasswordForm.password.$error.minlength || changePasswordForm.password.$error.maxlength)">
+            Password must be between 6 and 100 characters.
             </div>
-                <div class="changeAvatarButton">change avatar</div>
+            <div class="inputError"
+                  ng-show="(changePasswordForm.$submitted || changePasswordForm.passwordAgain.$dirty) && changePasswordForm.passwordAgain.$error.equals">
+                Password not matching
             </div>
-            <div class="changeAvatarButton">change cover</div>
-        </div>
-        <div class="userMain">
-
-        </div>
+            <input type="submit" class="right" ng-disabled="changePasswordForm.$invalid" value="change password"/>
+        </form>
     </div>
 </div>
 <div ng-include="'partial/footer.html'"></div>

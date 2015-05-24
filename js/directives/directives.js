@@ -43,6 +43,38 @@ app.directive('clickAnywhereButHere', function($document){
     }
 });
 
-app.controller('MyController', function($scope){
+app.directive("fileread", [function () {
+    return {
+        scope: {
+            fileread: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("change", function (changeEvent) {
+                var reader = new FileReader();
+                reader.onload = function (loadEvent) {
+                    scope.$apply(function () {
+                        scope.fileread = {
+                            size: changeEvent.target.files[0].size,
+                            data: loadEvent.target.result
+                        };
+                    });
+                };
 
-})
+                reader.readAsDataURL(changeEvent.target.files[0]);
+            });
+        }
+    }
+}]);
+app.directive("clickTo", [function () {
+    return {
+        scope: {
+            clickTo: "="
+        },
+        link: function (scope, element, attributes) {
+            element.bind("click", function(){
+                var element = document.getElementById(attributes.clickTo);
+                element.click();
+            });
+        }
+    }
+}]);

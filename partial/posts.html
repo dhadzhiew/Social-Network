@@ -20,7 +20,7 @@
         <div ng-click="post.showComments = !post.showComments" class="commentsCount">{{post.totalCommentsCount || 0}}</div>
     </div>
     <form novalidate ng-submit="editPost(editPostForm, post);" ng-show="post.editing" name="editPostForm">
-        <textarea required ng-model="post.postContent"></textarea><br/>
+        <textarea required ng-minlength="2" ng-model="post.postContent"></textarea><br/>
         <input type="submit" ng-disabled="editPostForm.$invalid" value="Edit" />
     </form>
 </div>
@@ -35,10 +35,10 @@
                 <div class="date">{{comment.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
             </div>
             <div>
-                    <span ng-click="comment.editing = !comment.editing" ng-show="comment.author.username == user.username"
-                          class="editButton">Edit</span>
-                    <span ng-click="deleteComment(post.id, comment);" ng-show="comment.author.username == user.username || post.author.username == user.username"
-                          class="deleteButton">Delete</span>
+                <span ng-click="comment.editing = !comment.editing" ng-show="comment.author.username == user.username"
+                      class="editButton">Edit</span>
+                <span ng-click="deleteComment(post, comment);" ng-show="comment.author.username == user.username || post.author.username == user.username"
+                      class="deleteButton">Delete</span>
             </div>
         </div>
         <div class="commentContent">
@@ -48,7 +48,7 @@
             </div>
             <form ng-show="comment.editing" name="editCommentForm" novalidate ng-submit="editComment(post.id, comment);">
                 <div>
-                    <textarea ng-model="comment.commentContent" required class="textareaComment" ></textarea>
+                    <textarea ng-model="comment.commentContent" ng-minlength="2" required class="textareaComment" ></textarea>
                 </div>
                 <input type="submit" ng-disabled="editCommentForm.$invalid" value="edit"/>
             </form>
@@ -56,7 +56,7 @@
     </div>
     <form name="form" novalidate ng-submit="submitComment(post);">
         <div>
-            <textarea ng-model="post.unsubmitCommentContent" name="commentContent" required class="textareaComment" ></textarea>
+            <textarea ng-model="post.unsubmitCommentContent" ng-minlength="2" name="commentContent" required class="textareaComment" ></textarea>
         </div>
         <input type="submit" ng-disabled="form.$invalid" value="comment"/>
     </form>

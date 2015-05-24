@@ -8,7 +8,9 @@
                 <li ng-click="showFriends = true" click-anywhere-but-here="showFriends = false">
                     <a>
                         &#xe008;
-                        <span ng-show="(user.friendRequests|filter:{processed: 'undefined'}).length" class="friendRequestsCount">{{(user.friendRequests|filter:{processed: 'undefined'}).length}}</span>
+                        <span ng-show="(user.friendRequests|filter:{processed: 'undefined'}).length" class="friendRequestsCount">
+                            {{(user.friendRequests|filter:{processed: 'undefined'}).length}}
+                        </span>
                     </a>
                     <div ng-show="showFriends" class="dropDownContainer">
                         <div class="upArrow friendRequestsArrow"></div>
@@ -52,14 +54,15 @@
                         </div>
                     </div>
                 </li>
+                <li><a ng-click="logout();">&#xe163;</a></li>
             </ul>
         </nav>
-        <div id="profileInfo"  ng-show="isLogged">
+        <a href="#/user/{{user.username}}" id="profileInfo"  ng-show="isLogged">
             <div>
                 <p class="online">ONLINE</p>
                 <p class="name">{{user.name}}</p>
             </div>
             <img ng-src="{{user.profileImageData || defaultUserAvatar}}" alt=""/>
-        </div>
+        </a>
     </div>
 </header>

@@ -299,6 +299,8 @@ label, input[type=radio]{
     display: flex;
     flex-direction: row;
     padding-top: 10px;
+    cursor: pointer;
+    text-decoration: none;
 }
 #profileInfo > div{
     padding: 5px 5px 0 0;
@@ -358,10 +360,10 @@ label, input[type=radio]{
 .wall #friends{
     margin-top: 20px;
 }
-.userPreview .cover{
+.cover{
     text-align: center;
 }
-.userPreview .cover > img{
+.cover > img{
     max-width: 100%;
     height: 170px;
 }
@@ -413,6 +415,7 @@ label, input[type=radio]{
 .userMain .posts{
     flex-grow: 1;
     margin-top: 20px;
+    word-break: break-all;
 }
 .post{
     margin: 0 10px 20px 0;
@@ -483,6 +486,7 @@ label, input[type=radio]{
     border-bottom: 2px solid #eeeeee;
     margin: 10px 0;
     padding: 10px;
+    word-break: break-all;
 }
 .comments > .comment .header  img{
     width: 20px;
@@ -556,4 +560,65 @@ textarea.textareaComment{
 }
 .editButton:hover, .deleteButton:hover{
     background: #f5f5f5;
+}
+.userEdit{
+    position: relative;;
+}
+.userEdit .avatar{
+    width:100px;
+    height: 100px;
+    position: absolute;
+    top: 40px;
+    left: 30px;
+    border-radius: 5px;
+    border: 5px solid #fff;
+}
+.changesButtons{
+    margin-top: 10px;
+    padding: 10px 0;
+}
+.changeButton{
+    background: #3fbffc;
+    padding: 10px 20px;
+    color: #fff;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-bottom: 1px solid #3bb1e8;
+}
+.right{
+    float: right;
+}
+.userEdit form input{
+    margin-right: 10px;
+}
+.hidden{
+    width: 0;
+    height:0;
+    border:0;
+    padding:0;
+    margin:0;
+    display: none;
+}
+.friendsPage > div{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.friendsPage > div .friend{
+    margin: 10px;
+    min-width: 100px;
+    width: 100px;
+    padding: 5px;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    background: #f5f5f5;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 10pt;
+    text-align: center;
+    border: 1px solid #dedede;
+    border-radius: 3px;
+}
+.friendsPage > div .friend:hover{
+    background: #eeeeee;
 }

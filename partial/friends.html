@@ -1,6 +1,6 @@
 <div class="clear">
     <h3>Friends</h3>
-    <a href="#/" class="friendsCount">{{user.friends.totalCount}} <div>Total</div></a>
+    <a href="#/friends" class="friendsCount">{{user.friends.totalCount}} <div>Total</div></a>
 </div>
 <a ng-repeat="friend in user.friends.friends" href="#/user/{{friend.username}}">
     <img ng-src="{{friend.profileImageData || defaultUserAvatar}}" alt=""/></a>

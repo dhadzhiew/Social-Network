@@ -1,0 +1,20 @@
+<div ng-include="'partial/header.html'"></div>
+<div class="container">
+    <div class="top">
+        <div class="innerLimiter">
+            <h1>Friends</h1>
+        </div>
+    </div>
+    <div class="innerLimiter friendsPage" ng-controller="userController" ng-init="loadAllFriends();">
+        <div class="clear">
+            <input type="text" class="right" ng-model="filterFriends" placeholder="Filter..."/>
+        </div>
+        <div>
+            <a href="#/user/{{friend.username}}" class="friend" ng-repeat="friend in user.allFriends | filter: {name: filterFriends}">
+                <div><img ng-src="{{friend.profileImageData || defaultUserAvatar}}" alt="{{friend.name}}'s photo"/></div>
+                <p>{{friend.name}}</p>
+            </a>
+        </div>
+    </div>
+</div>
+<div ng-include="'partial/footer.html'"></div>

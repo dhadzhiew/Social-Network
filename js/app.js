@@ -23,7 +23,11 @@ app.config(function($routeProvider) {
         })
         .when('/profile', {
             templateUrl: 'partial/editProfile.html',
-            controller: 'userController'
+            controller: 'mainController'
+        })
+        .when('/friends', {
+            templateUrl: 'partial/friendsPage.html',
+            controller: 'mainController'
         })
         .otherwise({
             redirectTo: '/'
@@ -36,7 +40,7 @@ app.run(function($rootScope, $location, authentication) {
                 $location.path('/');
             }
 
-            if(($location.path().indexOf('user') != -1 || $location.path().indexOf('/profile') != -1) && !isLogged){
+            if(($location.path().indexOf('user') != -1 || $location.path().indexOf('/friends') != -1 || $location.path().indexOf('/profile') != -1) && !isLogged){
                 $location.path('/');
             }
         });

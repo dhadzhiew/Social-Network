@@ -91,13 +91,66 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
     };
 
     service.getFriendFriendsPreview = function(username){
-            return $http.get(
-                BASE_URL_SERVICE + 'users/' + username + '/friends/preview',
-                {
-                    headers: authentication.getHeaders()
-                }
-            );
-    }
+        return $http.get(
+            BASE_URL_SERVICE + 'users/' + username + '/friends/preview',
+            {
+                headers: authentication.getHeaders()
+            }
+        );
+    };
+
+    service.editProfile = function(user){
+        var data = {
+            name: user.name,
+            email: user.email,
+            gender: user.gender
+        };
+
+        if(user.tempProfileImageData){
+            data.profileImageData = user.tempProfileImageData.data;
+        }else{
+            data.profileImageData = user.profileImageData;
+        }
+        if(user.tempCoverImageData){
+            data.coverImageData = user.tempCoverImageData.data;
+        }else{
+            data.coverImageData = user.coverImageData;
+        }
+        return $http(
+            {
+                url: serviceUrl,
+                method: "PUT",
+                headers: authentication.getHeaders(),
+                data: data
+            }
+        );
+    };
+
+    service.changePassword = function(user){
+        var data = {
+            oldPassword: user.oldPassword,
+            newPassword: user.password,
+            confirmPassword: user.passwordAgain
+        };
+        return $http(
+            {
+                url: serviceUrl + 'changepassword',
+                method: "PUT",
+                headers: authentication.getHeaders(),
+                data: data
+            }
+        );
+    };
+
+    service.getAllFriends = function(){
+        return $http(
+            {
+                url: serviceUrl + 'friends',
+                method: "GET",
+                headers: authentication.getHeaders()
+            }
+        );
+    };
 
     return service;
 });

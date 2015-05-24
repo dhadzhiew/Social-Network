@@ -1,4 +1,4 @@
-app.controller('feedController', function($scope, authentication, feedData, DEFAULT_USER_AVATAR, DEFAULT_USER_COVER, $routeParams){
+app.controller('feedController', function($scope, authentication, feedData, DEFAULT_USER_AVATAR, DEFAULT_USER_COVER, $routeParams, notify){
     $scope.defaultUserAvatar = DEFAULT_USER_AVATAR;
     $scope.defaultUserCover = DEFAULT_USER_COVER;
     $scope.post = {};
@@ -19,7 +19,7 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
     };
 
     $scope.likePost = function(post){
-        if(post.author.isFriend == false && post.wallOwner.isFriend == false){
+        if(post.author.isFriend == false && post.wallOwner.isFriend == false && post.author.username != authentication.getUsername()){
             return;
         }
         if(!post.liked){
@@ -50,7 +50,7 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
     };
 
     $scope.likeComment = function likeComment(post, comment){
-        if(post.author.isFriend == false && post.wallOwner.isFriend == false){
+        if(post.author.isFriend == false && post.wallOwner.isFriend == false && post.author.username != authentication.getUsername()){
             return;
         }
 
@@ -102,10 +102,14 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
             });
     };
 
-    $scope.deleteComment = function deleteComment(postId, comment){
-        feedData.deleteComment(postId, comment.id)
+    $scope.deleteComment = function deleteComment(post, comment){
+        feedData.deleteComment(post.id, comment.id)
             .success(function(){
                 comment.deleted = true;
+                post.totalCommentsCount--;
+            })
+            .error(function(error){
+                notify.showError('Liking failed.', error);
             });
     };
 
