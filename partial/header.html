@@ -1,6 +1,7 @@
-<header>
+<header ng-controller="userController" ng-init="loadUserData()">
     <div class="innerLimiter">
         <a href="#/" id="logo"></a>
+        <p class="loading white" ng-show="isLogged === undefined">Loading...</p>
         <nav ng-show="isLogged">
             <ul>
                 <li><a href="#/">&#xe021;</a></li>

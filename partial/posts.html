@@ -1,0 +1,63 @@
+<div class="header">
+    <a href="#/user/{{post.author.username}}">
+        <img ng-src="{{post.author.profileImageData || defaultUserAvatar}}" alt="{{post.author.name}}'s avatar"/>
+    </a>
+    <div class="authorAndDate">
+        <a href="#/user/{{post.author.username}}" class="name">{{post.author.name}}</a>
+        <div class="date">{{post.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
+    </div>
+    <div>
+        <span ng-click="post.editing = !post.editing" ng-show="post.author.username == user.username"
+              class="editButton">Edit</span>
+        <span ng-click="deletePost(post);" ng-show="post.author.username == user.username || post.wallOwner.username == user.username"
+              class="deleteButton">Delete</span>
+    </div>
+</div>
+<div class="postContent">
+    <span>{{post.postContent}}</span>
+    <div class="likesComments">
+        <div ng-click="likePost(post);" class="likesCount">{{post.likesCount || 0}}</div>
+        <div ng-click="post.showComments = !post.showComments" class="commentsCount">{{post.totalCommentsCount || 0}}</div>
+    </div>
+    <form novalidate ng-submit="editPost(editPostForm, post);" ng-show="post.editing" name="editPostForm">
+        <textarea required ng-model="post.postContent"></textarea><br/>
+        <input type="submit" ng-disabled="editPostForm.$invalid" value="Edit" />
+    </form>
+</div>
+<div class="comments" ng-show="post.showComments">
+    <div class="comment" ng-hide="comment.deleted" ng-repeat="comment in post.comments | orderBy: 'id'">
+        <div class="header">
+            <a href="#/user/{{comment.author.username}}">
+                <img ng-src="{{comment.author.profileImageData || defaultUserAvatar }}" alt="{{comment.author.name}}'s photo"/>
+            </a>
+            <div class="authorAndDate">
+                <a href="#/user/{{comment.author.username}}" class="name">{{comment.author.name}}</a>
+                <div class="date">{{comment.date | date:'dd MMMM yyyy HH:mm:ss'}}</div>
+            </div>
+            <div>
+                    <span ng-click="comment.editing = !comment.editing" ng-show="comment.author.username == user.username"
+                          class="editButton">Edit</span>
+                    <span ng-click="deleteComment(post.id, comment);" ng-show="comment.author.username == user.username || post.author.username == user.username"
+                          class="deleteButton">Delete</span>
+            </div>
+        </div>
+        <div class="commentContent">
+            <span>{{comment.commentContent}}</span>
+            <div class="likesComments">
+                <div ng-click="likeComment(post, comment)" class="likesCount">{{comment.likesCount}}</div>
+            </div>
+            <form ng-show="comment.editing" name="editCommentForm" novalidate ng-submit="editComment(post.id, comment);">
+                <div>
+                    <textarea ng-model="comment.commentContent" required class="textareaComment" ></textarea>
+                </div>
+                <input type="submit" ng-disabled="editCommentForm.$invalid" value="edit"/>
+            </form>
+        </div>
+    </div>
+    <form name="form" novalidate ng-submit="submitComment(post);">
+        <div>
+            <textarea ng-model="post.unsubmitCommentContent" name="commentContent" required class="textareaComment" ></textarea>
+        </div>
+        <input type="submit" ng-disabled="form.$invalid" value="comment"/>
+    </form>
+</div>

@@ -90,5 +90,14 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
         });
     };
 
+    service.getFriendFriendsPreview = function(username){
+            return $http.get(
+                BASE_URL_SERVICE + 'users/' + username + '/friends/preview',
+                {
+                    headers: authentication.getHeaders()
+                }
+            );
+    }
+
     return service;
 });
