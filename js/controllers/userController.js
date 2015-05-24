@@ -16,11 +16,13 @@ app.controller('userController', function($scope, authentication, $routeParams, 
                 $scope.loadingLogin = false;
                 authentication.setCredentials(serverData);
                 clearData();
-                $location.path('/')
+                $location.path('/');
+                notify.showInfo('You have logged.');
             })
             .error(function(error){
                 $scope.invalidLogin = true;
                 $scope.loadingLogin = false;
+                notify.showError('Login failed.', error);
             });
     };
 
@@ -149,6 +151,7 @@ app.controller('userController', function($scope, authentication, $routeParams, 
 
     $scope.logout = function(){
         authentication.clearCredentials();
+        $route.reload();
         $location.path('/');
     };
 

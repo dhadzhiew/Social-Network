@@ -54,7 +54,7 @@
             </form>
         </div>
     </div>
-    <span class="showAll" ng-hide="allCommentsShowed" ng-click="loadAllComments(post);">Show all</span>
+    <span class="showAll" ng-hide="post.allCommentsShowed" ng-click="loadAllComments(post);">Show all</span>
     <form name="form" novalidate ng-submit="submitComment(post);">
         <div>
             <textarea ng-model="post.unsubmitCommentContent" ng-minlength="2" name="commentContent" required class="textareaComment" ></textarea>

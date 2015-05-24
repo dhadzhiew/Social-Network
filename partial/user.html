@@ -5,7 +5,7 @@
             <img ng-src="{{visitUserData.coverImageData || defaultUserCover}}"/>
         </div>
         <div class="userInfo">
-            <img class="avatar" src="{{visitUser.profileImageData || defaultUserAvatar}}" alt="{{visitUserData.name}}'s avatar"/>
+            <img class="avatar" src="{{visitUserData.profileImageData || defaultUserAvatar}}" alt="{{visitUserData.name}}'s avatar"/>
             <div>
                 <div class="name">{{visitUserData.name}}</div>
                 <div ng-click="sendRequest()" ng-hide="visitUserData.hasPendingRequest === undefined || visitUserData.hasPendingRequest == true || visitUserData.isFriend == true"

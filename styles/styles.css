@@ -6,6 +6,8 @@
     url('fonts/glyphicons-halflings-regular.woff') format('woff'), /* Pretty Modern Browsers */
     url('fonts/glyphicons-halflings-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
     url('fonts/glyphicons-halflings-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 *{
     margin:0;
@@ -586,6 +588,7 @@ textarea.textareaComment{
     text-transform: uppercase;
     cursor: pointer;
     border-bottom: 1px solid #3bb1e8;
+    text-decoration: none;
 }
 .right{
     float: right;
@@ -642,4 +645,9 @@ textarea.textareaComment{
 }
 .userHover{
     top: 52px;
+}
+.homeButton{
+    width: 140px;
+
+    display:block;
 }
