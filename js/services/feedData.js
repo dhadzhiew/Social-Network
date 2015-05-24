@@ -115,6 +115,13 @@ app.factory('feedData', function($http, authentication, BASE_URL_SERVICE){
         });
     };
 
+    service.getAllComments = function(postId){
+            return $http({
+                url: serviceUrl + postId + '/comments',
+                method: "GET",
+                headers: authentication.getHeaders()
+            });
+    };
 
     return service;
 });

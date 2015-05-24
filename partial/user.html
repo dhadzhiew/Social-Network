@@ -8,7 +8,7 @@
             <img class="avatar" src="{{visitUser.profileImageData || defaultUserAvatar}}" alt="{{visitUserData.name}}'s avatar"/>
             <div>
                 <div class="name">{{visitUserData.name}}</div>
-                <div ng-click="sendRequest()" ng-hide="visitUser.hasPendingRequest === undefined || visitUserData.hasPendingRequest == true || visitUserData.isFriend == true"
+                <div ng-click="sendRequest()" ng-hide="visitUserData.hasPendingRequest === undefined || visitUserData.hasPendingRequest == true || visitUserData.isFriend == true"
                      class="friendRequestButton">Send friend request</div>
                 <div class="status" ng-show="visitUserData.isFriend">Friend</div>
                 <div class="status" ng-show="visitUserData.hasPendingRequest && visitUserData.username != user.username">Pending</div>
@@ -16,7 +16,7 @@
         </div>
         <div class="userMain">
             <div class="posts" ng-controller="feedController">
-                <form ng-if="visitUser.isFriend || visitUser.username == user.username" novalidate name="form" ng-submit="writePost(visitUser.username)">
+                <form ng-if="visitUserData.isFriend || visitUserData.username == user.username" novalidate name="form" ng-submit="writePost(visitUserData.username)">
                     <textarea required ng-minlength="2" name="postContent" ng-model="post.postContent" placeholder="Write a post"></textarea>
                     <div>
                         <input type="submit" ng-disabled="form.$invalid" value="post"/>

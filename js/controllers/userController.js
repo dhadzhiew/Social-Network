@@ -122,9 +122,9 @@ app.controller('userController', function($scope, authentication, $routeParams, 
     };
 
     $scope.sendRequest = function sendRequest(){
-        userData.sendFriendRequest($scope.visitUser.username)
+        userData.sendFriendRequest($routeParams.username)
             .success(function(){
-                $scope.visitUser.hasPendingRequest = true;
+                $scope.visitUserData.hasPendingRequest = true;
             });
     };
 

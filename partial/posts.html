@@ -44,10 +44,8 @@
         <div class="commentContent">
             <span>{{comment.commentContent}}</span>
             <div class="likesComments">
-                {{comment.liked}}
                 <div ng-click="likeComment(post, comment)" liked="comment.liked" class="likesCount"></div>{{comment.likesCount}}
             </div>
-            <span class="button">load all</span>
             <form ng-show="comment.editing" name="editCommentForm" novalidate ng-submit="editComment(post.id, comment);">
                 <div>
                     <textarea ng-model="comment.commentContent" ng-minlength="2" required class="textareaComment" ></textarea>
@@ -56,6 +54,7 @@
             </form>
         </div>
     </div>
+    <span class="showAll" ng-hide="allCommentsShowed" ng-click="loadAllComments(post);">Show all</span>
     <form name="form" novalidate ng-submit="submitComment(post);">
         <div>
             <textarea ng-model="post.unsubmitCommentContent" ng-minlength="2" name="commentContent" required class="textareaComment" ></textarea>

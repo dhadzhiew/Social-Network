@@ -141,6 +141,15 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
             });
     };
 
+    $scope.loadAllComments = function(post){
+        feedData.getAllComments(post.id)
+            .success(function(data){
+                data.allCommentsShowed = true;
+                post.comments = data;
+            });
+
+    };
+
     $scope.loadFeed = function(){
         if($scope.postLoading){
             return;

@@ -630,3 +630,16 @@ textarea.textareaComment{
 .big{
     font-size: 14pt;
 }
+.showAll{
+    cursor: pointer;
+}
+#posts .header{
+    position: relative;
+}
+.userHover > .dropDownContent{
+    background: #313131;
+    color: #999;
+}
+.userHover{
+    top: 52px;
+}
