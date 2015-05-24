@@ -7,11 +7,11 @@
 <div class="innerLimiter clear wall">
     <div id="posts">
         <div ng-controller="feedController" ng-init="loadMyFeed('', 5);" >
-            <p class="loading" ng-show="myFeed === undefined">Loading...</p>
             <div ng-controller="userController">
                 <div class="post"  ng-repeat="post in myFeed" ng-include="'partial/posts.html'"></div>
             </div>
         </div>
+        <p class="loading big" ng-show="myFeed === undefined || $scope.postLoading === true">Loading...</p>
     </div>
     <div id="friends" ng-controller="userController" ng-init="loadMyFriends();" ng-include="'partial/friends.html'"></div>
 </div>

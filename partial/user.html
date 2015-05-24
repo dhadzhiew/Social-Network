@@ -2,16 +2,16 @@
 <div class="container" ng-controller="userController">
     <div class="innerLimiter userPreview" ng-controller="userController" ng-init="loadVisitUserData();">
         <div class="cover">
-            <img ng-src="{{visitUser.coverImageData || defaultUserCover}}"/>
+            <img ng-src="{{visitUserData.coverImageData || defaultUserCover}}"/>
         </div>
         <div class="userInfo">
-            <img class="avatar" src="{{visitUser.profileImageData || defaultUserAvatar}}" alt="{{visitUser.name}}'s avatar"/>
+            <img class="avatar" src="{{visitUser.profileImageData || defaultUserAvatar}}" alt="{{visitUserData.name}}'s avatar"/>
             <div>
-                <div class="name">{{visitUser.name}}</div>
-                <div ng-click="sendRequest()" ng-hide="visitUser.hasPendingRequest === undefined || visitUser.hasPendingRequest == true || visitUser.isFriend == true"
+                <div class="name">{{visitUserData.name}}</div>
+                <div ng-click="sendRequest()" ng-hide="visitUser.hasPendingRequest === undefined || visitUserData.hasPendingRequest == true || visitUserData.isFriend == true"
                      class="friendRequestButton">Send friend request</div>
-                <div class="status" ng-show="visitUser.isFriend">Friend</div>
-                <div class="status" ng-show="visitUser.hasPendingRequest && visitUser.username != user.username">Pending</div>
+                <div class="status" ng-show="visitUserData.isFriend">Friend</div>
+                <div class="status" ng-show="visitUserData.hasPendingRequest && visitUserData.username != user.username">Pending</div>
             </div>
         </div>
         <div class="userMain">
@@ -25,12 +25,14 @@
                 <div ng-init="loadUserFeed('', 5);" >
                     <div class="post" ng-repeat="post in visitUserFeed" ng-include="'partial/posts.html'"></div>
                 </div>
+
+                <p class="loading big" ng-show="$scope.postLoading">Loading...</p>{{$scope.postLoading}}
             </div>
             <div id="friends" ng-controller="userController" ng-init="loadVisitUserPreviewFriends();"
                   ng-show="visitUser.friendsPreview.totalCount > 0" >
                 <div class="clear">
                     <h3>Friends</h3>
-                    <a href="#/" class="friendsCount">{{visitUser.friendsPreview.totalCount}} <div>Total</div></a>
+                    <a href="#/user/{{visitUserData.username}}/friends" class="friendsCount">{{visitUser.friendsPreview.totalCount}} <div>Total</div></a>
                 </div>
                 <a ng-repeat="friend in visitUser.friendsPreview.friends" href="#/user/{{friend.username}}">
                     <img ng-src="{{friend.profileImageData || defaultUserAvatar}}" alt="{{friend.name}}'s photo"/></a>

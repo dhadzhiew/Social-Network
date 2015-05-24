@@ -16,7 +16,7 @@
 <div class="postContent">
     <span>{{post.postContent}}</span>
     <div class="likesComments">
-        <div ng-click="likePost(post);" class="likesCount">{{post.likesCount || 0}}</div>
+        <div liked="{{post.liked}}" ng-click="likePost(post);" class="likesCount"></div>{{post.likesCount || 0}}
         <div ng-click="post.showComments = !post.showComments" class="commentsCount">{{post.totalCommentsCount || 0}}</div>
     </div>
     <form novalidate ng-submit="editPost(editPostForm, post);" ng-show="post.editing" name="editPostForm">
@@ -44,8 +44,10 @@
         <div class="commentContent">
             <span>{{comment.commentContent}}</span>
             <div class="likesComments">
-                <div ng-click="likeComment(post, comment)" class="likesCount">{{comment.likesCount}}</div>
+                {{comment.liked}}
+                <div ng-click="likeComment(post, comment)" liked="comment.liked" class="likesCount"></div>{{comment.likesCount}}
             </div>
+            <span class="button">load all</span>
             <form ng-show="comment.editing" name="editCommentForm" novalidate ng-submit="editComment(post.id, comment);">
                 <div>
                     <textarea ng-model="comment.commentContent" ng-minlength="2" required class="textareaComment" ></textarea>

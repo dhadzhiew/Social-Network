@@ -25,6 +25,10 @@ app.config(function($routeProvider) {
             templateUrl: 'partial/editProfile.html',
             controller: 'mainController'
         })
+        .when('/user/:username/friends', {
+            templateUrl: 'partial/friendFriends.html',
+            controller: 'mainController'
+        })
         .when('/friends', {
             templateUrl: 'partial/friendsPage.html',
             controller: 'mainController'

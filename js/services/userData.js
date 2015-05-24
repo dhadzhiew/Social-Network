@@ -152,5 +152,14 @@ app.factory('userData', function(authentication, $http, BASE_URL_SERVICE) {
         );
     };
 
+
+    service.getUserAllFriends = function(username){
+        return $http({
+            url: BASE_URL_SERVICE + 'users/' + username + '/friends',
+            method: "GET",
+            headers: authentication.getHeaders()
+        });
+    };
+
     return service;
 });

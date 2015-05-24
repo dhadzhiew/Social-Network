@@ -1,4 +1,4 @@
-app.controller('userController', function($scope, authentication, $routeParams, $location, DEFAULT_USER_AVATAR, notify, userData){
+app.controller('userController', function($scope, authentication, $routeParams, $route, $location, DEFAULT_USER_AVATAR, notify, userData){
     $scope.defaultUserAvatar = DEFAULT_USER_AVATAR;
     $scope.user = {};
     $scope.user.username = authentication.getUsername();
@@ -68,7 +68,7 @@ app.controller('userController', function($scope, authentication, $routeParams, 
     $scope.loadVisitUserData = function loadVisitUserData(){
         userData.getUserDataByUsername($routeParams.username)
             .success(function(data){
-                $scope.visitUser = data;
+                $scope.visitUserData = data;
             });
     };
 
@@ -129,7 +129,6 @@ app.controller('userController', function($scope, authentication, $routeParams, 
     };
 
     $scope.editProfile = function(form, user){
-        console.log(user);
         if(user.tempProfileImageData && user.tempProfileImageData.size > 128000){
             notify.showError('Avatar size cannot be more than 128KB.');
             return;
@@ -142,6 +141,7 @@ app.controller('userController', function($scope, authentication, $routeParams, 
         userData.editProfile(user)
             .success(function(data){
                 notify.showInfo(data.message);
+                $route.reload();
             }).error(function(serverError){
                 notify.showError('', serverError);
             });
@@ -169,4 +169,14 @@ app.controller('userController', function($scope, authentication, $routeParams, 
                 notify.showError('Loading friends failed.', error);
             });
     };
+
+    $scope.loadFriendFriends = function(){
+        if($routeParams.username == authentication.getUsername()){
+            $location.path('/friends');
+        }
+        userData.getUserAllFriends($routeParams.username)
+            .success(function(data){
+                $scope.visitUser.allFriends = data;
+            });
+    }
 });

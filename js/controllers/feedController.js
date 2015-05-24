@@ -2,6 +2,8 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
     $scope.defaultUserAvatar = DEFAULT_USER_AVATAR;
     $scope.defaultUserCover = DEFAULT_USER_COVER;
     $scope.post = {};
+    $scope.visitUserFeed = [];
+    $scope.lastVisitUserPostId = '';
 
     $scope.writePost = function(username){
         var data = {
@@ -127,11 +129,50 @@ app.controller('feedController', function($scope, authentication, feedData, DEFA
             });
     };
 
-    $scope.loadUserFeed = function loadFeedUser(startId, pageSize){
-        feedData.getUserFeed($routeParams.username, startId, pageSize)
+    $scope.loadUserFeed = function loadFeedUser(fake,pageSize){
+        $scope.postLoading = true;
+        feedData.getUserFeed($routeParams.username, $scope.lastVisitUserPostId, pageSize)
             .success(function(userFeed){
-                $scope.visitUserFeed = userFeed;
+                $scope.postLoading = false;
+                userFeed.forEach(function (post){
+                    $scope.visitUserFeed.push(post);
+                    $scope.lastVisitUserPostId = post.id;
+                });
             });
-    }
+    };
+
+    $scope.loadFeed = function(){
+        if($scope.postLoading){
+            return;
+        }
+        if(!$routeParams.username){
+            var lastId = $scope.myFeed[$scope.myFeed.length - 1].id || '' ;
+            $scope.postLoading = true;
+            feedData.getNewsFeed(lastId, 5)
+                .success(function(userFeed){
+                    $scope.postLoading = false;
+                    userFeed.forEach(function(post){
+                        $scope.myFeed.push(post);
+                    });
+                });
+        }else{
+            $scope.postLoading = true;
+            $scope.loadUserFeed('', 5);
+        }
+    };
+
+    $(document).ready(function(){
+        //lastAddedLiveFunc();
+        $(window).scroll(function(){
+
+            var wintop = $(window).scrollTop(), docheight = $(document).height(), winheight = $(window).height();
+            var  scrolltrigger = 0.95;
+
+            if  ((wintop/(docheight-winheight)) > scrolltrigger) {
+                $scope.loadFeed();
+            }
+        });
+    });
+
 
 });

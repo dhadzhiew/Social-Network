@@ -115,5 +115,6 @@ app.factory('feedData', function($http, authentication, BASE_URL_SERVICE){
         });
     };
 
+
     return service;
 });
